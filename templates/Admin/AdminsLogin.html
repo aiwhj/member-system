@@ -1,0 +1,38 @@
+{% include 'Admin/Head.html' %}
+    <body class="b-c-e0e">
+        <!-- 头部 -->
+        <main id="main" class="panel b-cff">
+            <div class="w-100 b-cff   dn">
+                <div style="clear:both;"></div>
+            </div>
+            <!-- 内容 -->
+            <div class="w-100" style="background-color:#333;">
+                <div class="w1170-lh20 p50-mt60 t-ac">
+                    <div class=" w350-b1-p26-pr-m70-dib-bc m0a" style="margin-top:70px;">
+                        <div class="c-mb26 fs16">管理员登录</div>
+                        <form action="{{ path_for('AdminsLoginDo') }}" id="form" method="post">
+                            <div class="c-mb15 fs16">
+                                <input type="text" name="admin_name" class="form-control bi-denglu br2 pl40" placeholder="输入您的账号/手机号"></input>
+                            </div>
+                            <div class="c-mb15 fs16">
+                                <input type="password" name="admin_pass" class="form-control bi-denglu2 br2 pl40" placeholder="输入您的密码"></input>
+                            </div>
+                            <div class="c-mb15 fs16">
+                                <input style="width:39%;" name="verity" type="text" class="form-control bi-denglu2 br2 pl40 fl" placeholder="输入验证码"></input>
+                                <p class=" fr">
+                                    <img class="w100h40 cp" src="{{ path_for('Captcha', {'name': 'ee' }) }}" onclick="this.src = this.src.split('?')[0]+'?rnd=' + Math.random();">
+                                    <span class="f-s12">点击图片切换</span></p>
+                            </div>
+                            <span class="bc-b1-bsn-c-txn bca8 pr di-b" onclick="return submitAjsx('post')">
+                                <span>登&nbsp录</span></span>
+                        </form>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div class="w100-h252 ">
+                <div class="lh24-ha-c-p8" style="background:none;">Copyright ©2014-2015 jiecheng All Rights Reserved 豫ICP备14025133号</div></div>
+        </main>
+    </body>
+
+</html>

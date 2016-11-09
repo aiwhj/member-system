@@ -1,0 +1,22 @@
+{
+    "require": {
+        "slim/slim": "^3.5",
+        "illuminate/database": "^5.3",
+        "phpoffice/phpexcel": "^1.8",
+        "slim/twig-view": "^2.1",
+        "bryanjhv/slim-session": "^3.0",
+        "monolog/monolog": "^1.21",
+        "gregwar/captcha": "^1.1",
+        "alexgarrett/violin": "^2.2",
+        "illuminate/events": "^5.3",
+        "gregwar/cache": "^1.0",
+        "predis/predis": "^1.1",
+        "dankal/dk-alidayu": "^1.0"
+    },
+	"autoload": {
+        "psr-4": {
+            "": ["src/Controller/Home/","src/Controller/Admin/","src/Controller/Base/","src/Middleware/","src/Filters/"]
+        },
+		"files": ["src/Function/Functions.php"]
+    }
+}

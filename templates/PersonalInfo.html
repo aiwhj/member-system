@@ -1,0 +1,118 @@
+	{% include 'Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			{% include 'Left.html' %}
+			<div class="w-kddx1_color">
+				{% include 'Top.html' %}
+				<!-- 内容 -->
+				<div class="w-80 m0a pr m-twzdax  m-b80">
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<p class="bb_1d6dxwz">经纪人信息</p>
+						<div class="w-50 fl dx_t-acolor">
+							<p><span class="w30_tar">经纪人姓名：</span><span class="m-l20">{{ data.real_name }}</span></p>
+							<p><span class="w30_tar">经纪人编号：</span><span class="m-l20">{{ data.id|member }}</span></p>
+							<p><span class="w30_tar">推荐人姓名：</span><span class="m-l20">{{ data.recommender_name|default('暂无') }}</span></p>
+							<p><span class="w30_tar">推荐人编号：</span><span class="m-l20">{{ data.recommender_id|default('暂无') }}</span></p>
+							<p><span class="w30_tar">购车款：</span><span class="m-l20">{{ data.car_money|default('暂无') }}</span></p>
+						</div>
+						<div class="w-50 fr dx_t-acolor">
+							<p><span class="w30_tar">注册时间：</span><span class="m-l20">{{ data.reg_time|date('Y-m-d H:i:s') }}</span></p>
+							<p><span class="w30_tar">激活时间：</span><span class="m-l20">{{ data.active_time|date('Y-m-d H:i:s') }}</span></p>
+							<p><span class="w30_tar">经纪人等级：</span><span class="m-l20">{{ data.user_grade }}</span></p>
+							<p><span class="w30_tar">车型：</span><span class="m-l20">{{ data.cartype }}</span></p>
+						</div>
+						<a class="pa_sqjhwez" href="{{ path_for('Graded') }}"><span class="jhanniu_ys">申请升级</span></a>
+						<div style="clear:both;"></div>
+					</div>
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<p class="bb_1d6dxwz">个人资料
+							<a class="m-l20"  onClick="admin_role_add()">
+								<span class="jhanniu_ys">修改资料</span>
+							</a>
+						</p>
+						<div class="w-50 fl dx_t-acolor">
+							<p><span class="w30_tar">手机号码：</span><span class="m-l20">{{ data.phone|default('未填写') }}</span></p>
+							<p><span class="w30_tar">QQ：</span><span class="m-l20">{{ data.qq|default('未填写') }}</span></p>
+							<p><span class="w30_tar">邮箱：</span><span class="m-l20">{{ data.email|default('未填写') }}</span></p>
+							
+						</div>
+						<div class="w-50 fr dx_t-acolor">
+							<p><span class="w30_tar">身份证号：</span><span class="m-l20">{{ data.idcard|default('未填写') }}</span></p>
+							<p><span class="w30_tar">开户账号：</span><span class="m-l20">{{ data.real_name|default('未填写') }}</span></p>
+							<p><span class="w30_tar">开户行：</span><span class="m-l20">{{ data.bank|default('未填写') }}</span></p>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<div class="w-100 dx_t-acolor">
+							<div class="colo_mbbjly">
+								<span style="margin-right:20px;">系统公告</span>
+								时间：{{ data.announcement.send_time|date('Y-m-d H:i:s') }}
+								<span></span>
+							</div>
+							<p class="p-b_colorbjly2">
+								{% autoescape false %}
+								{{ data.announcement.contants }}
+								{% endautoescape %}
+							</p>
+							<span class="jhanniu_ysjly1">管理员</span>
+							<div style="clear:both;"></div>
+						</div>	
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+				<div style="display:none;" class="w-80 m0a pr m-t30 m-b80" id="xiugai_1">
+						<form class="w-100 dx_t-acolor" action="{{ path_for('PersonalInfoUpdate') }}" method="post">
+							<p><span class="w30_tar">新手机号码：</span><span class="pl20w70">
+								<input class="mh-p10-bc-o01 b0-bsn-c" id="phone" name="phone" style="width:70%;" placeholder="输入新手机号码" type="text"></input>
+								<span class="fr" style="width:25%;" >
+									<button class="btn btn-small reset-code" id="send_verity" onclick="return false">获取验证码</button>
+									<button class="btn btn-small reset-code" id="J_resetCode" style="display:none;" onclick="return false"><span id="J_second">60</span>秒后重发</button>
+								</span>
+							</span></p>
+							<p><span class="w30_tar">验证码：</span><span class="pl20w70">
+								<input class="mh-p10-bc-o01 b0-bsn-c" name="phone_verity" id="phone_verity" placeholder="验证码：" type="text"></input>
+							</span></p>
+							<p><span class="w30_tar">新QQ：</span><span class="pl20w70">
+								<input class="mh-p10-bc-o01 b0-bsn-c" name="qq" placeholder="输入新QQ" type="text"></input>
+							</span></p>
+							<p><span class="w30_tar">新邮箱：</span><span class="pl20w70">
+								<input class="mh-p10-bc-o01 b0-bsn-c" name="email" placeholder="输入新邮箱：" type="text"></input>
+							</span></p>
+							<p><span class="w30_tar">新开户账号：</span><span class="pl20w70">
+								<input class="mh-p10-bc-o01 b0-bsn-c" name="bank_id" placeholder="输入新开户账号：" type="text"></input>
+							</span></p>
+							<p><span class="w30_tar">新开户行：</span><span class="pl20w70">
+								<input class="mh-p10-bc-o01 b0-bsn-c" name="bank" placeholder="输入新开户行：" type="text"></input>
+							</span></p>
+							<input type="submit" class="jhanniu_ys1 b0-bsn-c m-l20 fr cp" value="确认修改" onclick="return submitAjsx('put')" ></input>
+						</form>
+				</div>
+	</body>
+	{% include 'Foot.html' %}
+		<script type="text/javascript">
+			/*用户-添加*/
+				function admin_role_add(){
+				var xiugai_1 = $('#xiugai_1').html;
+					layer.open({
+					type:1,
+					title:"修改资料",
+					closeBtn:1,
+      				area: ['350px','500px'],
+					skin:'layui-layer-lan',
+					content:$('#xiugai_1')
+
+					});
+				};
+			$('#send_verity').click(function(){
+				var phone=$('#phone').val();//获取本页面其他标签的值 
+				data =ajaxSend("/common/verity","POST",{ phone: phone });
+				if(data=='success') {
+					$("phone").attr("readonly",true);
+					resetCode();
+				}
+				return false;
+			});
+		</script>

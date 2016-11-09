@@ -1,0 +1,51 @@
+	{% include 'Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			{% include 'Left.html' %}
+			<div class="w-kddx1_color">
+				{% include 'Top.html' %}
+				<!-- 内容 -->
+				<div class="w-80 m0a pr m-twzdax  m-b80">
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<p class="bb_1d6dxwz_w">登陆日志</p>
+						<table class="w-100 dx_t-acolor">
+							<tr class="tr_xm">
+								<td class="w30_tar1">登录时间</td>
+								<td class="w30_tar1 t-ac">登录IP</td>
+								<td class="w30_tar1 t-ac">备注</td>
+							</tr>
+							{% for value in data.login_log %}
+							<tr>
+								<td class="w30_tar1">{{ value.login_time|date('Y-m-d H:i:s') }}</td>
+								<td class="w30_tar1 t-ac">{{ value.login_ip }}</td>
+								<td class="w30_tar1 t-ac">登录成功</td>
+							</tr>
+							{% endfor %}
+						</table>	
+						{% autoescape false %}
+						{{ page }}
+						{% endautoescape %}
+					</div>
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<p class="bb_1d6dxwz_w">升级日志</p>
+						<table class="w-100 dx_t-acolor">
+							<tr class="tr_xm">
+								<td class="w30_tar1">记录时间</td>
+								<td class="w30_tar1 t-ac">金额</td>
+								<td class="w30_tar1 t-ac">备注</td>
+							</tr>
+							{% for value in data.upgrade %}
+							<tr>
+								<td class="w30_tar1">{{ value.time|date('Y-m-d H:i:s') }}</td>
+								<td class="w30_tar1 t-ac">{{ value.grade_money }}</td>
+								<td class="w30_tar1 t-ac">【等级{{ value.new_grade }}】升级成功</td>
+							</tr>
+							{% endfor %}
+						</table>	
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+	</body>
+	{% include 'Foot.html' %}

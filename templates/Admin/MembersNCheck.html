@@ -1,0 +1,229 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-100 p10 m0a pr m-t10">
+                        <div class="w-100 p10 b-cfff pr yinying_xg">
+                            <div class="page-container">
+                                <div class="cl pd-5 bg-1 bk-gray mt-20">
+                                    <div class="di-b">
+									<form action="{{ path_for('Members') }}" method="get" class="di-b m0a">
+                                        <select name="ser" class="mh-p10-bc-o01-ht b0-bsn-c">
+                                            <option value="id" class="">编号</option>
+                                            <option value="phone" class="">手机</option>
+                                        </select>
+                                            <input type="text" id="" name="key" class="mh-p10-bc-o01-ht1 b0-bsn-c" placeholder="搜索"></input>
+                                        <input type="submit" class="jhanniu_ys2ht" value="搜索" />
+									 </form>
+                                    </div>
+                                    <span class="r" style="line-height:29px;">共有数据：
+                                        <strong>{{ count }}</strong>条</span></div>
+                                <div class="mt-20">
+                                    <table class="table table-border table-bordered table-hover table-bg">
+                                        <thead>
+                                            <tr class="text-c">
+                                                <th>经纪人姓名</th>
+                                                <th>经纪人编号</th>
+                                                <th>注册时间</th>
+                                                <th>购车款</th>
+                                                <th>手机</th>
+                                                <th>经纪人等级</th>
+                                                <th>身份证号码</th>
+                                                <th>激活</th>
+                                                <th>操作</th></tr>
+                                        </thead>
+                                        <tbody>
+											{% for value in data %}
+                                            <tr class="text-c">
+                                                <td>{{ value.real_name }}</td>
+                                                <td>{{ value.id|member }}</td>
+                                                <td>{{ value.reg_time|date('Y-m-d H:i:s') }}</td>
+                                                <td>￥{{ value.car_money|default('未填写') }}</td>
+                                                <td>{{ value.phone|default('未填写') }}</td>
+                                                <td>{{ value.user_grade }}级</td>
+                                                <td>{{ value.idcard|default('未填写') }}</td>
+                                                <td class="td-status">
+													{% if value.user_grade == 0 %}<a style="text-decoration:none" onClick="member_start(this, {{ value.id }} )" href="javascript:;" title="激活">
+                                                        <span class="label label-defaunt radius">未激活</span></a>{% else %}<span class="label label-defaunt radius">已激活</span></a>{% endif %}
+                                                </td>
+                                                <td>
+                                                    <a style="text-decoration:none">
+                                                        <span class="label label-defaunt radius" style="background-color:#237ca8;" onClick="check_more(this, {{ value.id }} )">查看详情</span></a>
+                                                </td>
+                                            </tr>
+											{% endfor %}
+                                        </tbody>
+                                    </table>
+									{% autoescape false %}
+									{{ page }}
+									{% endautoescape %}
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:none;" class="w-90 m0a pr m-t30" id="hylb">
+                    <form class="w-100 dx_t-acolor">
+                        <div class="w-100 b-cfff p20 m-t30 pr">
+                            <p class="bb_1d6dxwz">经纪人信息</p>
+							
+                            <div class="w-50 fl dx_t-acolor">
+                                <p>
+                                    <span class="w30_tar">经纪人姓名：</span>
+                                    <span class="m-l20" id="data_real_name">@_li_1122</span></p>
+                                <p>
+                                    <span class="w30_tar">登录名：</span>
+                                    <span class="m-l20" id="data_user_name">@_li_1122</span></p>
+                                <p>
+                                    <span class="w30_tar">经纪人姓名：</span>
+                                    <span class="m-l20" id="data_user_name">@_li_1122</span></p>
+                                <p>
+                                    <span class="w30_tar">经纪人编号：</span>
+                                    <span class="m-l20" id="data_id">1234567890</span></p>
+                                <p>
+                                    <span class="w30_tar">推荐人姓名：</span>
+                                    <span class="m-l20" id="data_recommender_name">hzg666（惠志刚）</span></p>
+                                <p>
+                                    <span class="w30_tar">推荐人编号：</span>
+                                    <span class="m-l20" id="data_recommender_id">1234567890</span></p>
+                            </div>
+							<div class="w-50 fr dx_t-acolor">
+								<p>
+                                    <span class="w30_tar">购车款</span>
+                                    <span class="m-l20" id="data_car_money">1_li_1122@email.com</span></p>
+									<p>
+                                    <span class="w30_tar">购车车型</span>
+                                    <span class="m-l20" id="data_cartype">1_li_1122@email.com</span></p>
+                                <p>
+                                    <span class="w30_tar">业绩</span>
+                                    <span class="m-l20" id="data_yeji">hzg666（惠志刚）</span></p>
+								<p>
+                                    <span class="w30_tar">首付款</span>
+                                    <span class="m-l20" id="data_prepay">1_li_1122@email.com</span></p>
+								<p>
+                                    <span class="w30_tar">未还首付款</span>
+                                    <span class="m-l20" id="data_repay">1_li_1122@email.com</span></p>
+							</div>
+                            <div style="clear:both;"></div>
+                        </div>
+                        <div class="w-100 b-cfff p20 m-t10 pr">
+                            <p class="bb_1d6dxwz">个人资料</p>
+                            <div class="w-50 fl dx_t-acolor">
+
+                                <p>
+                                    <span class="w30_tar">手机号码：</span>
+                                    <span class="m-l20" id="data_phone">@_li_1122</span></p>
+                                <p>
+                                    <span class="w30_tar">QQ：</span>
+                                    <span class="m-l20" id="data_qq">12345678901</span></p>
+                                <p>
+                                    <span class="w30_tar">邮箱：</span>
+                                    <span class="m-l20" id="data_email">1_li_1122@email.com</span></p>
+                            </div>
+                            <div class="w-50 fr dx_t-acolor">
+								<p>
+                                    <span class="w30_tar">购车款</span>
+                                    <span class="m-l20" id="data_car_money">1_li_1122@email.com</span></p>
+									<p>
+                                    <span class="w30_tar">购车车型</span>
+                                    <span class="m-l20" id="data_cartype">1_li_1122@email.com</span></p>
+                                <p>
+                                    <span class="w30_tar">身份证号：</span>
+                                    <span class="m-l20" id="data_idcard">410521199101370051</span></p>
+                                <p>
+                                    <span class="w30_tar">开户账号：</span>
+                                    <span class="m-l20" id="data_bank_id">6227 0052 4041 087</span></p>
+                                <p>
+                                    <span class="w30_tar">开户行：</span>
+                                    <span class="m-l20" id="data_bank">美联储</span></p>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </form>
+                </div>
+                <script type="text/javascript">$(function() {
+                        $('.table-sort').dataTable({
+                            "scrollX": true,
+                            "lengthChange": false,
+                            "searching": false,
+                            "autoWidth": false,
+                            "aoColumnDefs": [
+                            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                            {
+                                "orderable": false,
+                                "aTargets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                            } // 制定列不参与排序
+                            ]
+                        });
+                        $('.table-sort tbody').on('click', 'tr',
+                        function() {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            } else {
+                                table.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+                    });
+
+                    /*用户-取消激活*/
+                    function member_stop(obj, id) {
+                        layer.confirm('确认要取消激活吗？',
+                        function(index) {
+                            $(obj).parents("tr").find(".td-status").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="激活"><span class="label label-defaunt radius">未激活</span></a>');
+                            $(obj).remove();
+                            layer.msg('已取消!', {
+                                time: 1000
+                            });
+                        });
+                    }
+
+                    /*用户-激活*/
+                    function member_start(obj, id) {
+                        layer.confirm('确认要激活吗？请您先核对好用户信息',
+                        function(index) {
+                            ajaxSend("/system/member/member/"+id,"POST",[]);
+							location.replace(location.href);
+                        });
+                    }
+                    //查看详情
+                    function check_more(obj, id) {
+                        var jstj = $('#hylb').html;
+						data=ajaxGet("/system/member/member","POST",{ id : id });
+						$('#data_real_name').text(data.real_name);
+						$('#data_user_name').text(data.user_name);
+						$('#data_car_money').text(data.car_money);
+						$('#data_cartype').text(data.cartype);
+						$('#data_id').text(data.id);
+						$('#data_recommender_name').text(data.recommender_name);
+						$('#data_recommender_id').text(data.recommender_id);
+						$('#data_phone').text(data.phone);
+						$('#data_prepay').text(data.prepay);
+						$('#data_yeji').text(data.yeji);
+						$('#data_repay').text(data.repay);
+						$('#data_qq').text(data.qq);
+						$('#data_email').text(data.email);
+						$('#data_idcard').text(data.idcard);
+						$('#data_bank_id').text(data.bank_id);
+						$('#data_bank').text(data.bank);
+                        layer.open({
+                            type: 1,
+                            maxmin: 1,
+                            title: "经纪人详情",
+                            closeBtn: 1,
+                            area: ['700px', '650px'],
+                            skin: 'layui-layer-lan',
+                            content: $('#hylb'),
+                        });
+                    }</script>
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

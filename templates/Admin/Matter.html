@@ -1,0 +1,143 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <p class="lh_fsysh3">财务信息</p>
+                    <div class="w-100 p10 m0a pr">
+                        <div class="w-33 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 p10 b-cfff  yinying_xg">
+                                <div class=" b-c029fff p10 t-ac cfff">
+                                    <p class="f-s24 f-wb">￥
+                                        <span>100,00,00</span></p>
+                                    <p class="f-s16 m-t10 f-wb">分期账户总金额
+                                        <p></div>
+                            </div>
+                        </div>
+                        <div class="w-33 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 p10 b-cfff  yinying_xg">
+							<a href="{{ path_for('Grade') }}">
+                                <div class=" b-c4abaff p10 t-ac cfff">
+                                    <p class="f-s24 f-wb">￥
+                                        <span>{{ data.grade_money }}</span></p>
+                                    <p class="f-s16 m-t10 f-wb">升级费用总金额
+                                        <p></div></a>
+                            </div>
+                        </div>
+                        <div class="w-33 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 p10 b-cfff  yinying_xg">
+							<a href="{{ path_for('Prepays') }}">
+                                <div class=" b-c80cfff p10 t-ac cfff">
+                                    <p class="f-s24 f-wb">￥
+                                        <span>{{ data.prepay }}</span></p>
+                                    <p class="f-s16 m-t10 f-wb">公司垫付首付
+                                        <p></div></a>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <p class="lh_fsysh3">经纪人信息</p>
+                    <div class="w-100 p10 m0a pr">
+                        <div class="w-25 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 p10 b-cfff  yinying_xg">
+                                <div class="b-cfff p10 t-ac ">
+                                    <p class="f-s16 p10 f-wb">今日新增：
+                                        <span class="f-s24">{{ data.members.today }}</span>
+                                        <p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-25 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 p10 b-cfff  yinying_xg t-ac">
+                                <div class="b-cfff p10 t-ac ">
+                                    <p class="f-s16 p10 f-wb">昨日新增：
+                                        <span class="f-s24">{{ data.members.yesterday }}</span>
+                                        <p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-25 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 p10 b-cfff  yinying_xg t-ac">
+                                <div class=" b-cfff p10 t-ac ">
+                                    <p class="f-s16 p10 f-wb">本月新增：
+                                        <span class="f-s24">{{ data.members.month }}</span>
+                                        <p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-25 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 p10 b-cfff  yinying_xg t-ac">
+                                <div class="b-cfff p10 t-ac ">
+                                    <p class="f-s16 p10 f-wb">共有经纪人：
+                                        <span class="f-s24">{{ data.members.all }}</span>
+                                        <p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <p class="lh_fsysh3">待办事项</p>
+                    <div class="w-100 p10 m0a pr">
+                        <div class="w-21 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 b-cda5050  yinying_xg t-ac">
+                                <a href="{{ path_for('MembersNCheck') }}" class="cfff">
+                                    <p class="f-s16 p10 f-wb">注册待审核：
+                                        <span>{{ data.members.nocheck }}</span>
+                                        <p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="w-21 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 b-cda5050  yinying_xg t-ac">
+                                <a href="{{ path_for('NoCashsAdmin') }}" class="cfff">
+                                    <p class="f-s16 p10 f-wb">提现待审核：
+                                        <span>{{ data.cash.nocheck }}</span>
+                                        <p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="w-21 pr fl" style="padding:0px 10px;">
+                            <div class="w-100 b-cda5050  yinying_xg t-ac">
+                                <a href="{{ path_for('NoInchargesAdmin') }}" class="cfff">
+                                    <p class="f-s16 p10 f-wb">充值待审核：
+                                        <span>{{ data.incharge.nocheck }}</span>
+                                        <p>
+                                </a>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+                <script type="text/javascript">$(function() {
+                        $('.table-sort').dataTable({
+                            "scrollX": true,
+                            "lengthChange": false,
+                            "searching": false,
+                            "autoWidth": false,
+                            "aoColumnDefs": [
+                            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                            {
+                                "orderable": false,
+                                "aTargets": [0, 1, 2, 3, 4]
+                            } // 制定列不参与排序
+                            ]
+                        });
+                        $('.table-sort tbody').on('click', 'tr',
+                        function() {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            } else {
+                                table.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+                    });</script>
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

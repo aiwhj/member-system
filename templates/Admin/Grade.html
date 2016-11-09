@@ -1,0 +1,50 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-100 p10 m0a pr m-t10">
+                        <div class="w-100 p10 b-cfff pr yinying_xg">
+                            <div class="page-container">
+                                <div class="cl pd-5 bg-1 bk-gray mt-20">
+                                    <span class="r">共有数据：
+                                        <strong>{{ count }}</strong>条</span></div>
+                                <div class="mt-20">
+                                    <table class="table table-border table-bordered table-hover table-bg">
+                                        <thead>
+                                            <tr class="text-c">
+                                                <th>升级经纪人</th>
+                                                <th>经纪人编号</th>
+                                                <th>升级时间</th>
+                                                <th>所升等级</th>
+                                                <th>升级金额</th></tr>
+                                        </thead>
+                                        <tbody>
+										{% for value in data %}
+                                            <tr class="text-c">
+                                                <td>{{ value.user_name }}</td>
+                                                <td>{{ value.user_id|member }}</td>
+                                                <td>{{ value.time|date('Y-m-d H:i:s') }}</td>
+                                                <td>{{ value.new_grade }}级</td>
+                                                <td>￥{{ value.grade_money }}</td></tr>
+                                        </tbody>
+										{% endfor %}
+                                    </table>
+										{% autoescape false %}
+										{{ page }}
+										{% endautoescape %}
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

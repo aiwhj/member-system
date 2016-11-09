@@ -1,0 +1,36 @@
+	{% include 'Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			{% include 'Left.html' %}
+			<div class="w-kddx1_color">
+				{% include 'Top.html' %}
+				<!-- 内容 -->
+				<div class="w-80 m0a pr m-twzdax  m-b80">
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<p class="bb_1d6dxwz_w">团队列表</p>
+						<table class="w-100 dx_t-acolor">
+							<tr class="tr_xm">
+								<td class="w30_tar1">经纪人姓名</td>
+								<td class="w30_tar1 t-ac">经纪人编号</td>
+								<td class="w30_tar1 t-ac">注册时间</td>
+								<td class="w30_tar1 t-ac">车型</td>
+							</tr>
+							{% for value in data.info %}
+							<tr>
+								<td class="w30_tar1">{{ value.real_name }}</td>
+								<td class="w30_tar1 t-ac">{{ value.id|member }}</td>
+								<td class="w30_tar1 t-ac">{{ value.reg_time|date('Y-m-d H:i:s') }}</td>
+								<td class="w30_tar1 t-ac">{{ value.cartype|cartype }}</td>
+							</tr>
+							{% endfor %}
+						</table>	
+						{% autoescape false %}
+						{{ page }}
+						{% endautoescape %}
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+	</body>
+	{% include 'Foot.html' %}

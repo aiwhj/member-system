@@ -1,0 +1,117 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-100 p10 m0a pr m-t10">
+                        <div class="w-100 p10 b-cfff pr yinying_xg">
+                            <div class="page-container">
+                                <div class="cl pd-5 bg-1 bk-gray mt-20">
+                                    <a onClick="admin_role_add()">
+                                        <span class="jhanniu_ys2ht">添加车型</span></a>
+                                </div>
+                                <div class="mt-20">
+                                    <table class="table table-border table-bordered table-hover table-bg">
+                                        <thead>
+                                            <tr class="text-c">
+                                                <th>车型ID</th>
+                                                <th>车型</th>
+                                                <th>价格</th>
+                                                <th>操作</th></tr>
+                                        </thead>
+                                        <tbody>
+										{% for value in data %}
+                                            <tr class="text-c">
+                                                <td>{{ value.id }}</td>
+                                                <td>{{ value.name }}</td>
+                                                <td>{{ value.money }}</td>
+                                                <td class="td-status">
+                                                    <a style="text-decoration:none" onClick="member_start(this,{{ value.id }})" href="javascript:;" title="删除">
+                                                        <span class="label label-defaunt radius" style="background-color:red;">删除</span></a>
+                                                </td>
+                                            </tr>
+											{% endfor %}
+                                        </tbody>
+                                    </table>
+										{% autoescape false %}
+										{{ page }}
+										{% endautoescape %}
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:none;" class="w-80 m0a pr m-t30" id="tjgly">
+                    <form class="w-100 dx_t-acolor" action="{{ path_for('CartypeAdd') }}" method="post">
+                        <p>
+                            <span class="w30_tar"></span>
+                            <span class="pl20w70">
+                                <input class="mh-p10-bc-o01 b0-bsn-c" placeholder="车型" name="name" type="text"></input>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="w30_tar"></span>
+                            <span class="pl20w70">
+                                <input class="mh-p10-bc-o01 b0-bsn-c" placeholder="价格" name="money" type="text"></input>
+                            </span>
+                        </p>
+                        <input type="submit" class="jhanniu_ys1 b0-bsn-c m-l20 fr cp" value="确认添加" onclick="return submitAjsx('post')" ></input>
+                        <!-- <a class="fr" href="###"><span class="jhanniu_ysred">删除管理员</span></a> -->
+                        <div style="clear:both;"></div>
+                    </form>
+                </div>
+                <script type="text/javascript">$(function() {
+                        $('.table-sort').dataTable({
+                            "scrollX": true,
+                            "lengthChange": false,
+                            "searching": false,
+                            "autoWidth": false,
+                            "aoColumnDefs": [
+                            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                            {
+                                "orderable": false,
+                                "aTargets": [0, 1, 2, 3, 4]
+                            } // 制定列不参与排序
+                            ]
+                        });
+                        $('.table-sort tbody').on('click', 'tr',
+                        function() {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            } else {
+                                table.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+                    });
+
+                    /*用户-删除*/
+                    function member_start(obj, id) {
+                        layer.confirm('确认要删除吗？',
+                        function(index) {
+							ajaxSend("/system/cartype/cartype/"+id,"DELETE",[]);
+                            location.replace(location.href);
+                        });
+                    };
+                    /*用户-添加*/
+                    function admin_role_add() {
+                        var tjgly = $('#tjgly').html;
+                        layer.open({
+                            type: 1,
+                            title: "管理员添加",
+                            closeBtn: 1,
+                            area: ['350px', '450px'],
+                            skin: 'layui-layer-lan',
+                            content: $('#tjgly'),
+                        });
+                    };</script>
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

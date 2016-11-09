@@ -1,0 +1,98 @@
+	{% include 'Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			{% include 'Left.html' %}
+			<div class="w-kddx1_color">
+				{% include 'Top.html' %}
+				<!-- 内容 -->
+				<div class="w-80 m0a pr m-twzdax m-b80">
+					<div class="w-100m-t10">
+						<div class="w-50 p-r5 fl ">
+							<div class=" b-c029fff  p20 p-b20 yinying_xg t-ac cfff">
+								<h1>￥<span>{{ user.flow_money }}</span></h1>
+								<p class="f-s16 m-t10 f-wb">可提现余额<p>
+							</div>
+							<div class="w-100 fl m-t10">
+								<div class="yinying_xg t-ac cfff">
+									<span class="lh_hwtxsq1 b-ca5b0b6">冻结金额 :￥{{ user.freeze_money }}</span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="w-50  p-l5 fr">
+							<div class=" b-c80cfff  p20 p-b20 yinying_xg t-ac cfff">
+								<h1>￥{{ recorded }}</span></h1>
+								<p class="f-s16 m-t10 f-wb">今日收入<p>
+							</div>
+							<div class="w-50 p-r5 fl m-t10">
+								<div class="yinying_xg t-ac cfff">
+									<a  href="{{ path_for('Cashs') }}"><span class="lh_hwtxsq b-cff3802">提现申请</span></a>
+								</div>
+							</div>
+							<div class="w-50 p-l5 fr m-t10">
+								<div class="yinying_xg t-ac cfff">
+									<a  href="{{ path_for('Incharges') }}"><span class="lh_hwtxsq">在线充值</span></a>
+								</div>
+							</div>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div class="w-100 b-cfff p20 m-t10 pr yinying_xg">
+						<table class="w-100 dx_t-acolor">
+							<tr class="tr_xm">
+								<td class="w_tar1 t-ac">编号</td>
+								<td class="w_tar1 t-ac">时间</td>
+								<td class="w_tar1 t-ac">金额</td>
+								<td class="w_tar1 t-ac">状态</td>
+								<td class="w_tar1 t-ac">备注</td>
+							</tr>
+							{% for value in data %}
+							<tr class="">
+								<td class="w_tar1 t-ac">
+								{{ value.id }}
+								</td>
+								<td class="w_tar1 t-ac">{{ value.time|date('Y-m-d H:i:s') }}</td>
+								<td class="w_tar1 t-ac">
+								{% if value.whj == 1 %}+{% endif %}
+								{% if value.whj == 2 %}-{% endif %}
+								{% if value.whj == 3 %}-{% endif %}
+								{% if value.whj == 4 %}+{% endif %}
+								{% if value.whj == 5 %}+{% endif %}
+								{% if value.whj == 6 %}-{% endif %}
+								{% if value.whj == 7 %}+{% endif %}
+								{% if value.whj == 8 %}-{% endif %}
+								￥{{ value.money }}</td>
+								<td class="w_tar1 t-ac">
+								{% if value.whj == 1 %}收入{% endif %}
+								{% if value.whj == 2 %}支出{% endif %}
+								{% if value.whj == 3 %}支出{% endif %}
+								{% if value.whj == 4 %}收入{% endif %}
+								{% if value.whj == 7 %}收入{% endif %}
+								{% if value.whj == 5 %}收入{% endif %}
+								{% if value.whj == 6 %}支出{% endif %}
+								{% if value.whj == 8 %}支出{% endif %}
+								</td>
+								<td class="w_tar1 t-ac">
+								{% if value.whj == 1 %}充值收入{% endif %}
+								{% if value.whj == 2 %}提现支出{% endif %}
+								{% if value.whj == 3 %}升级支出{% endif %}
+								{% if value.whj == 4 %}自由奖金{% endif %}
+								{% if value.whj == 5 %}转账收入{% endif %}
+								{% if value.whj == 6 %}转账支出{% endif %}
+								{% if value.whj == 7 %}冻结奖金{% endif %}
+								{% if value.whj == 8 %}首付扣除{% endif %}
+								</td>
+							</tr>
+							{% endfor %}
+
+						</table>	
+						{% autoescape false %}
+						{{ page }}
+						{% endautoescape %}
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+	</body>
+	{% include 'Foot.html' %}

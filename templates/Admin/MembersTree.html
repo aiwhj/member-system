@@ -1,0 +1,58 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-100 p10 m0a pr m-t10">
+                        <div class="w-100 p10 b-cfff pr yinying_xg">
+                            <div class=" left pl20w70">
+                                <ul id="group_list" class="ztree"></ul>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                        <!--zTree用的script的开始-->
+		<script type="text/javascript">
+		var setting = {
+			async: {
+				enable: true,
+				url:"/system/member/getmemberlistasync",
+				autoParam:["id"]
+			},
+			view: {
+					nameIsHTML: true
+				}
+		};
+		$(document).ready(function(){
+			$.ajax({
+				type: "get",
+				async: false,				
+				url: "/system/member/getmemberlist/{{ data }}",
+					success: function(data) {
+						zNodes=JSON.parse(data);
+					}
+			});
+			$.fn.zTree.init($("#group_list"), setting, zNodes);//负责初始化,传递需要显示的json数据
+			    $('#test').click(function(){
+                var test=$.fn.zTree.getZTreeObj("group_list").getCheckedNodes(true);
+                var arr1=new Array();
+                for(i=0;i<test.length;i++){
+                var tmp=test[i]['id'];
+                if(tmp>10)
+                arr1.push(tmp);
+                    };
+				alert(arr1);
+            });	
+		});
+	</script>
+            </div>
+                </div>
+
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

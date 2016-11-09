@@ -1,0 +1,129 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-100 p10 m0a pr m-t10">
+                        <div class="w-100 p10 b-cfff pr yinying_xg">
+                            <div class="page-container">
+                                <div class="cl pd-5 bg-1 bk-gray mt-20">
+                                    <a onClick="admin_role_add()">
+                                        <span class="jhanniu_ys2ht">添加管理角色</span></a>
+                                </div>
+                                <div class="mt-20">
+                                    <table class="table table-border table-bordered table-hover table-bg">
+                                        <thead>
+                                            <tr class="text-c">
+                                                <th>角色</th>
+                                                <th>备注</th>
+                                                <th>建立时间</th>
+                                                <th>操作</th></tr>
+                                        </thead>
+                                        <tbody>
+										{% for value in data %}
+                                            <tr class="text-c">
+                                                <td>{{ value.name }}</td>
+                                                <td>{{ value.remark }}</td>
+                                                <td>{{ value.create_time|date('Y-m-d H:i:s') }}</td>
+                                                <td class="td-status">
+                                                    <a style="text-decoration:none" onClick="member_start(this,{{ value.id }})" href="javascript:;" title="删除">
+                                                        <span class="label label-defaunt radius" style="background-color:red;">删除</span></a>
+                                                </td>
+                                            </tr>
+										{% endfor %}
+                                        </tbody>
+                                    </table>
+										{% autoescape false %}
+										{{ page }}
+										{% endautoescape %}
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:none;" class="w-80 m0a pr m-t30" id="jstj">
+                    <form class="w-100 dx_t-acolor" action="{{ path_for('AdminsRoleAddDo') }}" method="post" >
+                        <p>
+                            <span class="w30_tar fl" style="line-height:37px;">名称：</span>
+                            <span class="pl20w70">
+                                <input class="mh-p10-bc-o01 b0-bsn-c w-100" name="name" placeholder="输入姓名" type="text"></input>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="w30_tar fl" style="line-height:37px;">备注：</span>
+                            <span class="pl20w70">
+                                <textarea class="w-100 mh-p10-bc-o0 b0-bsn-c" name="remark" placeholder="请填写您的问题" maxlength="100"></textarea>
+								<input type="hidden" id="role_id" name="roles" />
+                            </span>
+                        </p>
+                        <div>
+                            <span class="w30_tar"  style="line-height:37px;">权限设置：</span>
+                            <div class="zTreeDemoBackground left pl20w70 fr">
+                                <ul id="treeDemo" class="ztree"></ul>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                        <input style="margin-top:20px;" type="submit" class="jhanniu_ys1 b0-bsn-c m-l20 fr cp" value="确认添加" onclick="return submitAjsxRole('post')"></input>
+                        <!-- <a class="fr" href="###"><span class="jhanniu_ysred">删除管理员</span></a> --></form>
+                </div>
+                <script type="text/javascript">
+
+                    /*用户-删除*/
+                    function member_start(obj, id) {
+                        layer.confirm('确认要删除吗？',
+                        function(index) {
+							ajaxSend("/system/admin/rolesinfo/"+id,"DELETE",[]);
+                            //$(obj).parents("tr").remove();
+							location.replace(location.href);
+							$(obj).parents("tr").remove();
+                        });
+                    };
+                    /*用户-添加*/
+                    /*用户-添加*/
+                    function admin_role_add() {
+                        var jstj = $('#jstj').html;
+                        layer.open({
+                            type: 1,
+                            title: "管理员添加",
+                            closeBtn: 1,
+                            area: ['400px', '500px'],
+                            skin: 'layui-layer-lan',
+                            content: $('#jstj'),
+                        });
+                    };</script>
+                <!-- 内容 -->
+                <!--zTree用的script的开始-->
+                <SCRIPT type="text/javascript">
+						function getRoleId(){
+                            var test = $.fn.zTree.getZTreeObj("treeDemo").getCheckedNodes(true);
+                            var arr1 = new Array();
+                            for (i = 0; i < test.length; i++) {
+                                var tmp = test[i]['id'];
+                                arr1.push(tmp);
+                            };
+                            return arr1;
+							}
+				var setting = {
+                        check: {
+                            enable: true
+                        },
+                        data: {
+                            simpleData: {
+                                enable: true
+                            }
+                        }
+                    };
+                    var zNodes = ajaxGet("/system/admin/authrule","GET",[]);
+                    $(document).ready(function() {
+                        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                    });</SCRIPT>
+                <!--ztree结束--></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

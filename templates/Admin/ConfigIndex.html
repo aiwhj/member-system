@@ -1,0 +1,158 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-80 p10 m0a pr m-t10">
+						<div class="w-50 p10 b-cfff pr yinying_xg fl">
+							<p class="bb_1d6dxwz">奖金设置</p>
+							<form class="w-100 dx_t-acolor" action="{{ path_for('RewardConfigAdmin') }}" method="post" id="reward">
+								<p>
+									<span class="w30_tar fl">第一级：</span>
+									<span class="pl20w70">
+										<input name="rewarda" class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="第一级：" value="{{ data.reward.0 }}" type="text"></input>
+									</span>
+								</p>
+								<p>
+									<span class="w30_tar fl">第二级：</span>
+									<span class="pl20w70">
+										<input name="rewardb" class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="第二级：" value="{{ data.reward.1 }}" type="text"></input>
+									</span>
+								</p>
+								<p>
+									<span class="w30_tar fl">第三级：</span>
+										<span class="pl20w70">
+											<input name="rewardc" class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="第三级：" value="{{ data.reward.2 }}" type="text"></input>
+										</span>
+								</p>
+								<p>
+									<span class="w30_tar fl">第四级：</span>
+										<span class="pl20w70">
+											<input name="rewardd" class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="第四级：" value="{{ data.reward.3 }}" type="text"></input>
+										</span>
+								</p>
+								<p>
+									<span class="w30_tar fl">第五级：</span>
+										<span class="pl20w70">
+											<input name="rewarde" class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="第五级：" value="{{ data.reward.4 }}" type="text"></input>
+										</span>
+								</p>
+								<p>
+									<span class="w30_tar fl">第六级：</span>
+										<span class="pl20w70">
+											<input name="rewardf" class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="第六级：" value="{{ data.reward.5 }}" type="text"></input>
+										</span>
+								</p>
+								<p>
+									<span class="w30_tar fl">第七级：</span>
+										<span class="pl20w70">
+											<input name="rewardg" class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="第七级：" value="{{ data.reward.6 }}" type="text"></input>
+										</span>
+								</p>
+								<p>
+									<span class="w30_tar fl">第八级：</span>
+										<span class="pl20w70">
+											<input name="rewardh" class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="第八级：" value="{{ data.reward.7 }}" type="text"></input>
+										</span>
+								</p>
+								<input style="margin-top:20px;" type="submit" class="jhanniu_ys1 b0-bsn-c m-l20 fr cp" value="确认修改"onclick="return submitAjsxForm('post','reward')" ></input>
+								<!-- <a class="fr" href="###"><span class="jhanniu_ysred">删除管理员</span></a> -->
+								 <div style="clear:both;"></div>
+							</form>
+                        </div>
+                        <div class="w-50 p10 b-cfff pr yinying_xg  fr">
+							<p class="bb_1d6dxwz">提现设置</p>
+							<form class="w-100 dx_t-acolor"  action="{{ path_for('CashConfigAdmin') }}" method="post" id="cash">
+								
+								<p>
+									<span class="w30_tar fl">提现手续费(小数)：</span>
+									<span class="pl20w70">
+										<input class="mh-p10-bc-o01 b0-bsn-c w-100" name="cash_fee" placeholder="提现手续费：" value="{{ data.cash_fee }}" type="text"></input>
+									</span>
+								</p>
+								<p>
+									<span class="w30_tar fl">最大提现金额：￥</span>
+									<span class="pl20w70">
+										<input class="mh-p10-bc-o01 b0-bsn-c w-100" name="cash_max" placeholder="最大提现金额：￥" value="{{ data.cash_max }}" type="text"></input>
+									</span>
+								</p>
+								<div>
+									<span class="w30_tar fl">到账时间：</span>
+										<span class="pl20w70">
+											<input class="mh-p10-bc-o01 b0-bsn-c w-100" name="cash_time" placeholder="如：3到5个工作日" value="{{ data.cash_time }}" type="text"></input>
+										</span>
+									<div style="clear:both;"></div>
+								</div>
+								<input style="margin-top:20px;" type="submit" class="jhanniu_ys1 b0-bsn-c m-l20 fr cp" value="确认修改"onclick="return submitAjsxForm('post','cash')" ></input>
+								<!-- <a class="fr" href="###"><span class="jhanniu_ysred">删除管理员</span></a> -->
+								 <div style="clear:both;"></div>
+							</form>  
+							
+                        </div>
+						
+						<div class="w-50 p10 b-cfff pr yinying_xg  fr">	 
+                           <p class="bb_1d6dxwz">同一个账户间相互转账时间限制</p>
+							<form class="w-100 dx_t-acolor"  action="{{ path_for('TransferConfigAdmin') }}" method="post"  id="transfer">
+								
+								<p>
+									<span class="w30_tar fl">时间间隔（秒）</span>
+									<span class="pl20w70">
+										<input class="mh-p10-bc-o01 b0-bsn-c w-100"  name="transfer_limit" placeholder="时间间隔（秒）" value="{{ data.transfer_limit }}" type="text"></input>
+									</span>
+								</p>
+								
+								<input style="margin-top:20px;" type="submit" class="jhanniu_ys1 b0-bsn-c m-l20 fr cp" value="确认修改"onclick="return submitAjsxForm('post','transfer')" ></input>
+								<!-- <a class="fr" href="###"><span class="jhanniu_ysred">删除管理员</span></a> -->
+								 <div style="clear:both;"></div>
+							</form> 
+                    </div>
+						<div class="w-50 p10 b-cfff pr yinying_xg  fr">	 
+                           <p class="bb_1d6dxwz">首付百分比</p>
+							<form class="w-100 dx_t-acolor"  action="{{ path_for('PrepayConfigAdmin') }}" method="post"  id="prepay">
+								
+								<p>
+									<span class="w30_tar fl">首付百分比(小数)</span>
+									<span class="pl20w70">
+										<input class="mh-p10-bc-o01 b0-bsn-c w-100"  name="prepay" placeholder="首付百分比" value="{{ data.prepay }}" type="text"></input>
+									</span>
+								</p>
+								
+								<input style="margin-top:20px;" type="submit" class="jhanniu_ys1 b0-bsn-c m-l20 fr cp" value="确认修改"onclick="return submitAjsxForm('post','prepay')" ></input>
+								<!-- <a class="fr" href="###"><span class="jhanniu_ysred">删除管理员</span></a> -->
+								 <div style="clear:both;"></div>
+							</form> 
+						</div>	
+                </div>
+                <script type="text/javascript">$(function() {
+                        $('.table-sort').dataTable({
+                            "scrollX": true,
+                            "lengthChange": false,
+                            "searching": false,
+                            "autoWidth": false,
+                            "aoColumnDefs": [
+                            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                            {
+                                "orderable": false,
+                                "aTargets": [0, 1, 2, 3, 4, 5, 6]
+                            } // 制定列不参与排序
+                            ]
+                        });
+                        $('.table-sort tbody').on('click', 'tr',
+                        function() {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            } else {
+                                table.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+                    });</script>
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

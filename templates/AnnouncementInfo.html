@@ -1,0 +1,31 @@
+	{% include 'Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			{% include 'Left.html' %}
+			<div class="w-kddx1_color">
+				{% include 'Top.html' %}
+				<!-- 内容 -->
+				<div class="w-80 m0a pr m-twzdax m-b80">
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<div class="w-100 dx_t-acolor">
+							<div class="colo_mbbjly">
+								<span style="margin-right:20px;">{{ data.title }}</span>
+								时间：
+								<span>{{ data.send_time|date('Y-m-d H:i:s') }}</span>
+							</div>
+							<p class="p-b_colorbjly2">
+							{% autoescape false %}
+								{{ data.contants }}
+								{% endautoescape %}
+								
+							</p>
+							<span class="jhanniu_ysjly1">{{ data.send_name }}</span>
+							<div style="clear:both;"></div>
+						</div>	
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+	</body>
+	{% include 'Foot.html' %}

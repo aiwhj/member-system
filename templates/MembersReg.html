@@ -1,0 +1,132 @@
+	{% include 'Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			<div class="w-kddx1_color">
+				<!-- 内容 -->
+				<div class="w-90 m0a pr m-twzdax  m-b80">
+					<div class="w-50 b-cfff p20 m-t30 pr yinying_xg" style="border-top:5px solid #333;">
+					
+						<form action="{{ path_for('MembersRegDo') }}" method="post"class="dx_t-acolor">
+						<p class="bb_1d6dxwz">账号信息<span class="fr"><a href="{{ path_for('MembersLogin') }}" class="c666">返回登陆页面</a></span></p>
+							<p><span class="w30_tar">经纪人姓名：</span><span class="pl20w70">
+							<input name="real_name" class="mh-p10-bc-o01 b0-bsn-c" placeholder="经纪人姓名：" type="text"></input></span></p>		
+							<p><span class="w30_tar">身份证号：</span><span class="pl20w70">
+							<input name="idcard" class="mh-p10-bc-o01 b0-bsn-c" placeholder="身份证号：" type="text"></input></span></p>							
+
+							<p><span class="w30_tar">手机号：</span><span class="pl20w70">
+								<input name="phone" id="phone" style="width:70%;" class="mh-p10-bc-o01 b0-bsn-c" placeholder="请输入手机号" type="text"></input>
+								<!-- <span class="fr"> -->
+									<!-- <button class="btn btn-small reset-code" id="send_verity" onclick="return false">获取验证码</button> -->
+									<!-- <button class="btn btn-small reset-code" id="J_resetCode" style="display:none;" onclick="return false"><span id="J_second">60</span>秒后重发</button> -->
+								<!-- </span> -->
+							</span></p>
+							<!-- <p><span class="w30_tar">短信验证码：</span><span class="pl20w70"> -->
+							<!-- <input id="phone_verity" name="phone_verity" class="mh-p10-bc-o01 b0-bsn-c" placeholder="短信验证码：" type="text"></input></span></p> -->
+							<p><span class="w30_tar">登陆账号：</span><span class="pl20w70">
+							<input name="user_name" class="mh-p10-bc-o01 b0-bsn-c" placeholder="登陆账号：" type="text"></input></span></p>
+							<p><span class="w30_tar">登录密码：</span><span class="pl20w70">
+							<input name="user_pass" class="mh-p10-bc-o01 b0-bsn-c" placeholder="登录密码：" type="password"></input></span></p>
+							<p><span class="w30_tar">确认登陆密码：</span><span class="pl20w70">
+							<input name="re_user_pass" class="mh-p10-bc-o01 b0-bsn-c" placeholder="确认登陆密码：" type="password"></input></span></p>
+							<p><span class="w30_tar">推荐人编号：</span><span class="pl20w70">
+							<input name="recommender_id" class="mh-p10-bc-o01 b0-bsn-c" placeholder="推荐人编号：" type="text"></input></span></p>
+							<p><span class="w30_tar">推荐人姓名：</span><span class="pl20w70">
+							<input name="recommender_name" class="mh-p10-bc-o01 b0-bsn-c" placeholder="推荐人姓名：" type="text"></input></span></p>
+							<p><span class="w30_tar">支付密码：</span><span class="pl20w70">
+							<input name="user_pass2" class="mh-p10-bc-o01 b0-bsn-c" placeholder="支付密码：" type="password"></input></span></p>
+							<p><span class="w30_tar">确认支付密码：</span><span class="pl20w70">
+							<input name="re_user_pass2" class="mh-p10-bc-o01 b0-bsn-c" placeholder="确认支付密码：" type="password"></input></span></p>
+							<p><span class="w30_tar">车型：</span><span class="pl20w70">
+							<select class="mh-p10-bc-o01 b0-bsn-c" name="cartype" id="cartype">
+								{% for value in data.cartype %}
+								  <option value ="{{ value.id }}">{{ value.name }}</option>
+								{% endfor %}
+								<option value ="0">没有需要的车型</option>
+							</select>
+							</span></p>
+							<p id="cartype2" style="display:none;"><span class="w30_tar">自填车型：</span><span class="pl20w70">
+							<input name="cartype2" class="mh-p10-bc-o01 b0-bsn-c" placeholder="车型" type="text"></input>
+							</span></p>
+							<p><span class="w30_tar">所在地址：</span><span class="pl20w70">
+								<select class="mh-p10-bc-o01 b0-bsn-c" id="sheng" name="sheng">
+								{% for value in data.regions.sheng %}
+								  <option value ="{{ value.id }}" {% if value.id == 16 %}selected="selected"{% endif %}>{{ value.name }}</option>
+								  {% endfor %}
+								</select>
+								<select class="mh-p10-bc-o01 b0-bsn-c" id="shi" name="shi">
+								{% for value in data.regions.shi %}
+								  <option value ="{{ value.id }}" {% if value.id == 252 %}selected="selected"{% endif %}>{{ value.name }}</option>
+								  {% endfor %}
+								</select>	
+								<select class="mh-p10-bc-o01 b0-bsn-c" id="xian" name="xian" >
+								{% for value in data.regions.xian %}
+								  <option value ="{{ value.id }}" {% if value.id == 2759 %}selected="selected"{% endif %}>{{ value.name }}</option>
+								  {% endfor %}
+								</select>
+							</span></p>
+							<p><span class="w30_tar">详细地址：</span><span class="pl20w70">
+							<input name="addres" class="mh-p10-bc-o01 b0-bsn-c" placeholder="所在地址：" type="text"></input></span></p>
+							
+							
+							<p class="bb_1d6dxwz">个人资料</p>
+							<p><span class="w30_tar">QQ（选填）：</span><span class="pl20w70">
+							<input name="qq" class="mh-p10-bc-o01 b0-bsn-c" placeholder="QQ（选填）：" type="text"></input></span></p>
+							<p><span class="w30_tar">邮箱（选填）：</span><span class="pl20w70">
+							<input name="email" class="mh-p10-bc-o01 b0-bsn-c" placeholder="邮箱（选填）：" type="text"></input></span></p>
+
+							<p><span class="w30_tar">开户账号：</span><span class="pl20w70">
+							<input name="bank_id" class="mh-p10-bc-o01 b0-bsn-c" placeholder="开户账号：" type="text"></input></span></p>
+							<p><span class="w30_tar">开户行：</span><span class="pl20w70">
+							<input name="bank" class="mh-p10-bc-o01 b0-bsn-c" placeholder="开户行：" type="text"></input></span></p>
+<!-- 							<p><span class="w30_tar">验证码：</span><span class="pl20w70">
+								<input name="verity" style="width:50%;" class="mh-p10-bc-o01 b0-bsn-c" placeholder="请输入验证码" type="text"></input>
+								<span class="fr">
+									<img class="w100h40 cp" src="{{ path_for('Captcha', {'name': 'ee' }) }}" onclick="this.src = this.src.split('?')[0]+'?rnd=' + Math.random();">
+									<span class="m-l10 f-s12">点击图片切换</span>
+								</span>
+							</span></p> -->
+							<span type="submit" class="jhanniu_ys1 b0-bsn-c m-l20 fr cp" value="" onclick="submitAjsx('post')">确认注册</span>
+						</form>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+	</body>
+	<script language="javascript" type="text/javascript"> 
+		$(document).ready(function(){ 
+			$('#sheng').change(function(){
+				var id=$('#sheng').val();//获取本页面其他标签的值 
+				data=ajaxGet("/common/getregions/"+id,"GET",[]);
+				var id=$('#shi').html(data.regions.shi);
+				var id=$('#xian').html(data.regions.xian);
+			});
+			$('#cartype').change(function(){
+				var id=$('#cartype').val();//获取本页面其他标签的值 
+				if(id<=0) {
+					$('#cartype2').show();
+				}
+				if(id>0) {
+					$('#cartype2').hide();
+				}
+				var id=$('#shi').html(data.regions.shi);
+				var id=$('#xian').html(data.regions.xian);
+			});
+			$('#shi').change(function(){
+				var id=$('#shi').val();//获取本页面其他标签的值 
+				data=ajaxGet("/common/getregions/"+id,"GET",[]);
+				var id=$('#xian').html(data.regions.xian);
+			});
+			$('#send_verity').click(function(){
+				var phone=$('#phone').val();//获取本页面其他标签的值 
+				data =ajaxSend("/common/verity","POST",{ phone: phone });
+				if(data=='success') {
+					$("phone").attr("readonly",true);
+					resetCode();
+				}
+				return false;
+			});
+		});
+	</script>
+	{% include 'Foot.html' %}

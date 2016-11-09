@@ -1,0 +1,78 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-100 p10 m0a pr m-t10">
+                        <div class="w-100 p10 b-cfff pr yinying_xg">
+                            <div class="page-container">
+                                <div class="cl pd-5 bg-1 bk-gray mt-20">
+                                    <span class="l"></span>
+                                    <span class="r">共有数据：
+                                        <strong>88</strong>条</span></div>
+                                <div class="mt-20">
+                                    <table class="table table-border table-bordered table-hover table-bg table-sort">
+                                        <thead>
+                                            <tr class="text-c">
+                                                <th>
+                                                    <input type="checkbox" name="" value=""></th>
+                                                <th>经纪人姓名</th>
+                                                <th>经纪人编号</th>
+                                                <th>注册时间</th>
+                                                <th>手机号</th>
+                                                <th>银行账号</th>
+                                                <th>身份证</th>
+                                                <th>开户行</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="text-c">
+                                                <td>
+                                                    <input type="checkbox" value="1" name=""></td>
+                                                <td>张三</td>
+                                                <td>jc001</td>
+                                                <td>2016/09/08</td>
+                                                <td>13137100000</td>
+                                                <td>6227 0023 0052 091</td>
+                                                <td>410527199402050011</td>
+                                                <td>郑州银行</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">$(function() {
+                        $('.table-sort').dataTable({
+                            "scrollX": true,
+                            "lengthChange": false,
+                            "searching": false,
+                            "autoWidth": false,
+                            "aoColumnDefs": [
+                            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                            {
+                                "orderable": false,
+                                "aTargets": [0, 1, 2, 3, 4, 5, 6, 7]
+                            } // 制定列不参与排序
+                            ]
+                        });
+                        $('.table-sort tbody').on('click', 'tr',
+                        function() {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            } else {
+                                table.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+                    });</script>
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

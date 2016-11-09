@@ -1,0 +1,113 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-100 p10 m0a pr m-t10">
+                        <div class="w-100 p10 b-cfff pr yinying_xg">
+                            <div class="page-container">
+                                <div class="cl pd-5 bg-1 bk-gray mt-20">
+                                    <span>总升级收入：￥
+                                        <strong>{{ upgrade }}</strong></span>
+                                    <span class="m-l20">总充值收入：￥
+                                        <strong>{{ incharge }}</strong></span>
+                                    <span>总提现支出：￥
+                                        <strong>{{ cash }}</strong></span>
+                                    <span class="m-l20">总奖金支出：￥
+                                        <strong>{{ reward }}</strong></span>
+										
+                                    <span class="r">共有数据：
+                                        <strong>{{ count }}</strong>条</span></div>
+                                <div class="mt-20">
+                                    <table class="table table-border table-bordered table-hover table-bg">
+                                        <thead>
+                                            <tr class="text-c">
+                                                <th>编号</th>
+                                                <th>经纪人</th>
+                                                <th>金额</th>
+                                                <th>时间</th>
+                                                <th>备注</th></tr>
+                                        </thead>
+                                        <tbody>
+										{% for value in data %}
+                                            <tr class="text-c">
+                                                <td>
+								{% if value.whj == 1 %}充值{% endif %}
+								{% if value.whj == 2 %}提现{% endif %}
+								{% if value.whj == 3 %}升级{% endif %}
+								{% if value.whj == 4 %}奖金{% endif %}
+								{% if value.whj == 5 %}转入{% endif %}
+								{% if value.whj == 6 %}转出{% endif %}
+								{% if value.whj == 7 %}收入{% endif %}
+								{% if value.whj == 8 %}支出{% endif %}
+								{{ value.ID }}
+												</td>
+                                                <td>{{ value.name }}</td>
+                                                <td>
+								{% if value.whj == 1 %}+{% endif %}
+								{% if value.whj == 2 %}-{% endif %}
+								{% if value.whj == 3 %}-{% endif %}
+								{% if value.whj == 4 %}+{% endif %}
+								{% if value.whj == 5 %}+{% endif %}
+								{% if value.whj == 6 %}-{% endif %}
+								{% if value.whj == 7 %}+{% endif %}
+								{% if value.whj == 8 %}-{% endif %}
+								￥{{ value.money }}
+												</td>
+                                                <td>{{ value.time|date('Y-m-d H:i:s') }}</td>
+                                                <th>
+								{% if value.whj == 1 %}充值收入{% endif %}
+								{% if value.whj == 2 %}提现支出{% endif %}
+								{% if value.whj == 3 %}升级支出{% endif %}
+								{% if value.whj == 4 %}奖金收入{% endif %}
+								{% if value.whj == 5 %}转账收入{% endif %}
+								{% if value.whj == 6 %}转账支出{% endif %}
+								{% if value.whj == 7 %}冻结奖金{% endif %}
+								{% if value.whj == 8 %}首付扣除{% endif %}
+												</th>
+											</tr>
+										{% endfor %}
+                                        </tbody>
+                                    </table>
+										{% autoescape false %}
+										{{ page }}
+										{% endautoescape %}
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">$(function() {
+                        $('.table-sort').dataTable({
+                            "scrollX": true,
+                            "lengthChange": false,
+                            "searching": false,
+                            "autoWidth": false,
+                            "aoColumnDefs": [
+                            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                            {
+                                "orderable": false,
+                                "aTargets": [0, 1, 2, 3, 4, 5]
+                            } // 制定列不参与排序
+                            ]
+                        });
+                        $('.table-sort tbody').on('click', 'tr',
+                        function() {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            } else {
+                                table.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+                    });</script>
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>

@@ -1,0 +1,33 @@
+	{% include 'Admin/Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			{% include 'Admin/Left.html' %}
+			<div class="w-kddx1_color">
+				{% include 'Admin/Top.html' %}
+				<!-- 内容 -->
+				<div class="w-80 m0a pr m-twzdax m-b80">
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<table class="w-100 dx_t-acolor">
+							<tr class="tr_xm">
+								<td class="w22_tar1">车型</td>
+								<td class="w22_tar1 t-ac">金额</td>
+							</tr>
+							{% for value in data %}
+							<tr class="">
+								<td class="w22_tar1">
+									<a href="{{ path_for('AnnouncementInfo',{'id': value.id }) }}" class="a_hover">{{ value.name }}</a>
+								</td>
+								<td class="w22_tar1 t-ac">{{ value.money}}</td>
+							</tr>
+							{% endfor %}
+						</table>	
+						{% autoescape false %}
+						{{ page }}
+						{% endautoescape %}
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+	</body>
+	{% include 'Admin/Foot.html' %}

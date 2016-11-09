@@ -1,0 +1,30 @@
+	{% include 'Admin/Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			{% include 'Admin/Left.html' %}
+			<div class="w-kddx1_color">
+				{% include 'Admin/Top.html' %}
+				<!-- 内容 -->
+				<div class="w-80 m0a pr m-twzdax  m-b80">
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<p class="bb_1d6dxwz">修改登录密码（一级密码）</p>
+						<form class="w-100 dx_t-acolor" action="{{ path_for('AdminsInfoUpdate') }}" method="post" id="pass">
+						<div class="w-50 fl dx_t-acolor">
+							<p><span class="w30_tar">用户账号：</span><span class="m-l20">{{ data.admin_name }}</span></p>
+							<p><span class="w30_tar">原登录密码：</span><span class="pl20w70">
+							<input name="old_admin_pass" class="mh-p10-bc-o01 b0-bsn-c" placeholder="请填写旧密码" type="password"></input></span></p>
+							<p><span class="w30_tar">新登录密码：</span><span class="pl20w70">
+							<input name="admin_pass" class="mh-p10-bc-o01 b0-bsn-c" placeholder="请填写新密码" type="password"></input></span></p>
+							<p><span class="w30_tar">确认新密码：</span><span class="pl20w70">
+							<input name="re_admin_pass" class="mh-p10-bc-o01 b0-bsn-c" placeholder="确认新密码" type="password"></input></span></p>
+							<a class="fr" href="" onclick="return submitAjsxForm('put','pass')"><span class="jhanniu_ys1">修改密码</span></a>
+						</div>
+						</form>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+	</body>
+	{% include 'Admin/Foot.html' %}

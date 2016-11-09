@@ -1,0 +1,45 @@
+	{% include 'Head.html' %}  
+	<body>
+		<div class="dt dx_100">
+			{% include 'Left.html' %}
+			<div class="w-kddx1_color">
+				{% include 'Top.html' %}
+				<!-- 内容 -->
+				<div class="w-80 m0a pr m-twzdax m-b80">
+					<div class="w-100 b-cfff p20 m-t30 pr yinying_xg">
+						<table class="w-100 dx_t-acolor">
+							<tr class="tr_xm">
+								<td class="w22_tar1" style="width:55%;">标题</td>
+								<td class="w22_tar1 t-ac" style="width:20%;">时间</td>
+								<td class="w22_tar1 t-ac" style="width:25%;">类型</td>
+							</tr>
+							{% for value in data %}
+							<tr class="">
+								<td class="w22_tar1" style="width:55%;">
+									<a href="{{ path_for('MessageInfo',{'topic_id': value.id }) }}" class="a_hover">{{ value.contants	}}</a>
+								</td>
+								<td class="w22_tar1 t-ac" style="width:20%;">{{ value.send_time|date('Y-m-d H:i:s') }}</td>
+								<td class="w22_tar1 t-ac" style="width:25%;">{% if value.type == 1 %}系统消息{% else %}您的提问{% endif %}</td>
+							</tr>
+							{% endfor %}
+						</table>	
+						{% autoescape false %}
+						{{ page }}
+						{% endautoescape %}
+					</div>
+					<div class="w-100 b-cfff p20 m-t10 pr yinying_xg m-b80">
+						<form action="{{ path_for('MessageAdd') }}" method="post" >
+						<p class="bb_1d6dxwz_w">编辑留言</p>
+							<div class="b-c-fs-fw-mb">
+								<textarea name="contants" class="w-100 mh-p10-bc-o0 b0-bsn-c" placeholder="请填写您的问题" maxlength="500"></textarea>
+							</div>
+							<input class="fr jhanniu_ys1" type="submit"   onclick="return submitAjsx('post')" value="提交" />
+						</form>
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<!-- 内容 -->
+			</div>
+		</div>
+	</body>
+	{% include 'Foot.html' %}

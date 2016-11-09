@@ -1,0 +1,176 @@
+		{% include 'Admin/Head.html' %}
+        <body>
+            <div class="dt dx_100">
+                <!-- 右侧 -->
+                {% include 'Admin/Left.html' %}
+                <!-- 左侧 -->
+                <div class="w-kddx1_color">
+                    {% include 'Admin/Top.html' %}
+                    <!-- 内容 -->
+                    <div class="w-100 p10 m0a pr m-t10">
+                        <div class="w-100 p10 b-cfff pr yinying_xg">
+                            <div class="page-container">
+                                <div class="cl pd-5 bg-1 bk-gray mt-20">
+                                    <a class="" href="###" onClick="gonggao_add()">
+                                        <span class="jhanniu_ys2ht">添加系统公告</span></a>
+                                    <span class="r" style="line-height:29px;">共有数据：
+                                        <strong>{{ count }}</strong>条</span></div>
+                                <div class="mt-20">
+                                    <table class="table table-border table-bordered table-hover table-bg ">
+                                        <thead>
+                                            <tr class="text-c">
+                                                <th>
+                                                    <input type="checkbox" name="" value=""></th>
+                                                <th>公告标题</th>
+                                                <th>发布时间</th>
+                                                <th>发布人</th>
+                                                <th>操作</th></tr>
+                                        </thead>
+                                        <tbody>
+										{% for value in data %}
+                                            <tr class="text-c">
+                                                <td>
+                                                    <input type="checkbox" value="1" name=""></td>
+                                                <td>{{ value.title }}</td>
+                                                <td>{{ value.send_time|date('Y-m-d H:i:s') }}</td>
+                                                <td>{{ value.send_name }}</td>
+                                                <td class="td-status">
+                                                    <a style="text-decoration:none" onClick="member_start(this,{{ value.id }})" href="javascript:;" title="删除">
+                                                        <span class="label label-defaunt radius" style="background-color:red;">删除</span></a>
+                                                    <a style="text-decoration:none">
+                                                        <span class="label label-defaunt radius" onClick="member_edit(this,{{ value.id }})" style="background-color:#237ca8;">修改</span></a>
+                                                </td>
+                                            </tr>
+										{% endfor %}
+                                        </tbody>
+
+                                    </table>
+										{% autoescape false %}
+										{{ page }}
+										{% endautoescape %}
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:none" id="editor_ue">
+                    <form action="{{ path_for('AnnouncementAddAdmin') }}" id="form" method="post" class="w-100 dx_t-acolor p10 m-t30">
+						
+                        <table class="m0a " style="width:800px;">
+                            <tr>
+                                <td style="width:80px;">公告标题：</td>
+                                <td class="">
+                                    <input class="mh-p10-bc-o01 b0-bsn-c w-100" placeholder="输入标题" id="title" name="title" type="text"></input>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="w-100 m-t10" >
+                            <!-- 加载编辑器的容器 -->
+                            <script id="container" name="contants" type="text/plain"></script></div>
+                        <!-- 配置文件 -->
+                        <script type="text/javascript" src="/static/js/ueditor.config.js"></script>
+                        <!-- 编辑器源码文件 -->
+                        <script type="text/javascript" src="/static/js/ueditor.all.min.js"></script>
+                        <!-- 实例化编辑器 -->
+                        <script type="text/javascript">var editor = UE.getEditor('container');
+						</script>
+                        <p class="m0a m-t10" style="width:800px;">
+                            <input type="submit" class="jhanniu_ys1 b0-bsn-c fr cp di-b" onclick="return submitAjsx('post')">发布公告</input></p>
+                    </form>
+                </div>
+                <script type="text/javascript">
+				
+				$(function() {
+                        $('.table-sort').dataTable({
+                            "scrollX": true,
+                            "lengthChange": false,
+                            "searching": false,
+                            "autoWidth": false,
+                            "aoColumnDefs": [
+                            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                            {
+                                "orderable": false,
+                                "aTargets": [0, 1, 2, 3, 4]
+                            } // 制定列不参与排序
+                            ]
+                        });
+                        $('.table-sort tbody').on('click', 'tr',
+                        function() {
+                            if ($(this).hasClass('selected')) {
+                                $(this).removeClass('selected');
+                            } else {
+                                table.$('tr.selected').removeClass('selected');
+                                $(this).addClass('selected');
+                            }
+                        });
+                    });
+
+                    /*用户-删除*/
+                    function member_start(obj, id) {
+                        layer.confirm('确认要删除吗？',
+                        function(index) {
+							ajaxSend("/system/announcement/announcement/"+id,"DELETE",[]);
+                            //$(obj).parents("tr").remove();
+							location.replace(location.href);
+                        });
+                    };
+                    function member_edit(obj, aid) {
+						var data;
+						data=ajaxGet("/system/announcement/announcementone","POST",{ id : aid });
+						$('#title').val(data.title);
+						editor.addListener("ready", function () {
+							editor.setContent(data.contants);
+						});
+						editor.setContent(data.contants);
+						var url="/system/announcement/announcement";
+						$('form').attr('action',url+'/'+aid);
+                        layer.open({
+                            type: 1,
+                            shade: false,
+                            maxmin: 1,
+                            full: function(index) {
+                                content_height_change();
+                            },
+                            restore: function(index) {
+                                content_height_change();
+                            },
+                            skin: 'layui-layer-lan',
+                            area: ['auto', 'auto'],
+                            title: "bianji",
+                            //不显示标题
+                            content: $('#editor_ue')
+                        });
+                            //$(obj).parents("tr").remove();
+                    }
+                    /*用户-添加*/
+                    function gonggao_add() {
+						var url="/system/announcement/announcement";
+						$('form').attr('action',url);
+                        layer.open({
+                            type: 1,
+                            shade: false,
+                            maxmin: 1,
+                            full: function(index) {
+                                content_height_change();
+                            },
+                            restore: function(index) {
+                                content_height_change();
+                            },
+                            skin: 'layui-layer-lan',
+                            area: ['auto', 'auto'],
+                            title: "bianji",
+                            //不显示标题
+                            content: $('#editor_ue')
+                        });
+                    };
+                    function content_height_change() {
+                        var content_height = $('.layui-layer-page').height() - $('.layui-layer-title').height();
+                        $('.layui-layer-content').css('height', content_height);
+                    }</script>
+                </script>
+                <!-- 内容 --></div>
+        </body>
+		{% include 'Admin/Foot.html' %}
+
+</html>
